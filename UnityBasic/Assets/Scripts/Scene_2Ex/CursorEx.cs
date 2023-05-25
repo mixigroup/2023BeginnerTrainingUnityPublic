@@ -15,6 +15,9 @@ public class CursorEx : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        var vec = target.transform.position - this.transform.position;
+
+        transform.rotation = Quaternion.LookRotation(vec);
 
     }
 }

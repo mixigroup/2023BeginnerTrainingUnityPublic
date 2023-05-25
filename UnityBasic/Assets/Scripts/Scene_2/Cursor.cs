@@ -45,10 +45,12 @@ public class Cursor : MonoBehaviour
             input.z = 1;
         }
 
-        // 現在の回転に入力を加算
-        Vector3 newAngle = transform.rotation.eulerAngles + (input);
+        // 各軸のクォータニオンを作成
+        var rotX = Quaternion.AngleAxis(input.x, Vector3.right);
+        var rotY = Quaternion.AngleAxis(input.y, Vector3.up);
+        var rotZ = Quaternion.AngleAxis(input.z, Vector3.forward);
 
-        // rotationに代入
-        transform.rotation = Quaternion.Euler(newAngle);
+        // Y→X→Zの順に乗算
+        transform.rotation *= rotZ * rotX * rotY;
     }
 }

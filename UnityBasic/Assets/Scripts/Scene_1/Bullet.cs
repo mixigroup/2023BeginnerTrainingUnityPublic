@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
+    private Vector3 _direction;
+    private float Speed = 20.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,12 +15,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += _direction * Speed * Time.deltaTime;
+    }
+
+    public void SetDirection(Vector3 vec)
+    {
+        _direction = vec;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Bullet"))
+        if(collision.gameObject.CompareTag("Stage"))
         {
             Destroy(this.gameObject);
         }
